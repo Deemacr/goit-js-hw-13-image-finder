@@ -26,7 +26,7 @@ refs.searchForm.addEventListener('keypress', (event) => {
 
 refs.loadMore.addEventListener('click', (event) => {
 	apiService.fetchPics(searchQuery, page).then(tmp.loadMorePics).then(page += 1);
-	window.scrollTo(0, document.body.scrollHeight);
+	window.scrollTo(0, document.body.scrollHeight, { behaviour: 'smooth' });
 });
 
 
