@@ -16,13 +16,28 @@ refs.searchForm.addEventListener('submit', (event) => {
 		refs.galleryWrap.innerHTML = "";
 		return;
 	}
-	return apiService.fetchPics(searchQuery, page).then(pics => { if (pics.length < 12) { refs.loadMore.style.visibility = "hidden" }; tmp.updateGallery(pics); page += 1 });
+	return apiService.fetchPics(searchQuery, page)
+		.then(pics => {
+			if (pics.length < 12) {
+				refs.loadMore.style.visibility = "hidden"
+			};
+			tmp.updateGallery(pics);
+			page += 1
+		});
 });
 
 
 refs.loadMore.addEventListener('click', (event) => {
-	apiService.fetchPics(searchQuery, page).then(tmp.loadMorePics).then(page += 1);
-	window.scrollTo(0, document.body.scrollHeight, {
+	apiService.fetchPics(searchQuery, page)
+		.then(pics => {
+			if (pics.length < 12) {
+				refs.loadMore.style.visibility = "hidden"
+			};
+			tmp.loadMorePics(pics);
+			page += 1
+		});
+	window.scrollTo({
+		top: document.body.scrollHeight,
 		behavior: "smooth"
 	});
 });
